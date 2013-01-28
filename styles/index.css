@@ -1,0 +1,62 @@
+#bodyContent{
+	border: 1px solid #CCCCCC;
+	height:auto;
+	width:970px;
+	text-align:left;
+	border-radius:5px;
+}
+#bodyContent #titleScore{
+	font-size:15px;
+	font-weight:bold;
+	color:#008EC3;
+	padding:2px;
+	
+}
+#bodyContent .titleContent1{
+	background:#008EC3;
+	padding:5px;
+	font-weight:bold;
+	color:white;
+	
+}
+#bodyContent .titleKPI{
+	background:#CCCCCC;
+	padding:5px;
+	font-weight:bold;
+	color:black;
+	
+}
+#bodyContent .titleKPI .titleKPI_L{
+	float:left;
+	
+}
+#bodyContent .titleKPI .titleKPI_R{
+	float:right;
+	color:blue;
+	cursor:pointer;
+}
+
+.textR{
+	text-align:right;
+}
+#mainScore{
+	
+	float:left;
+	
+}
+#mainTitleScore{
+	
+	float:left;
+}
+.kpi{
+	cursor:pointer;
+}
+#userScore{
+	display:inline;
+}
+#score{
+	display:inline;
+}
+#bodyContent{
+	display:none;
+}
