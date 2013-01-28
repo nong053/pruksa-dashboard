@@ -300,7 +300,7 @@ $("#chart2").hide();
 					height:335,
 					width:650,
 					modal:true,
-					title: title_name
+					title:'คะแนน'
 				});
 			}
 		});

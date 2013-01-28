@@ -21,14 +21,14 @@
     
     if(!conn.isClosed()){
     	//out.print("ok connect database is sucessfully");
-   /*
+   
     	String query="select * from kpi_result LIMIT 5";
     	rs=mysqlConn.selectData(query);
     	while(rs.next()){
     		out.println(""+rs.getString("kpi_name"));
     		
     	}
-    */
+    
     }
     
 %>

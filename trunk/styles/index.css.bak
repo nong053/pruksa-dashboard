@@ -63,6 +63,3 @@
 #dialogbox1{
 display:none;
 }
-#dialogbox2{
-display:none;
-}
