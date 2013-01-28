@@ -23,18 +23,17 @@ queryMonth+="select distinct result_month, result_month_name";
 queryMonth+=" from kpi_result";
 queryMonth+=" where result_year = "+paramYear+"";
 queryMonth+=" order by result_month ";
-
+JSONArray array_obj1 = new JSONArray();
 	rs=mysqlConn.selectData(queryMonth);
-	if(rs.next()){
-		
+	while(rs.next()){
 		//out.println(rs.getString("result_month_name"));
-		array_obj.add(rs.getString("result_month_name"));
-		array_obj.add(rs.getString("result_month"));
-	}else{
-		array_obj.add("None");
-		//out.println("result is no data");
+		JSONArray array_obj2 = new JSONArray();
+		array_obj2.add(rs.getString("result_month_name"));
+		array_obj2.add(rs.getString("result_month"));
+
+		array_obj1.add(array_obj2);
 	}
-	out.println(array_obj);
+	out.println(array_obj1);
 }
 if(request.getParameter("request").equals("Project")){
 	

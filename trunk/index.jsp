@@ -887,15 +887,26 @@ Your
 			data:{'paramYear':year,'request':'month'},
 			success:function(data){
 				if(data[0]!='None'){
-				//console.log(data[0]);
+				//alert(data[0]);
 				//console.log(parseInt((data[1]))+1);
 				
-				var monthNumber=parseInt((data[1]));
-				Month(monthNumber);
-				
-				
+				//Ajax
+				var monthNumber="";
+				//Month(monthNumber);
+				$(".listSelectMonth").remove();
+				var month="";
+				month+="<select class=\"listSelectMonth\" id=\"ParamMonth\">";
+				$.each(data,function(index,indexEntry){
+				monthNumber=parseInt((indexEntry[1]));
+				//alert(monthNumber);
+				month+="<option value=\""+indexEntry[1]+"\">"+indexEntry[0]+"</option>";
+				});
+				month+="</select>";
+				$("#tdMonth").html(month);
 				
 				$(".listSelectMonth").kendoDropDownList();
+
+
 				//Run Project List 
 				Project(year,monthNumber,userLogin);
 				}
