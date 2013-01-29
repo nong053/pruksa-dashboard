@@ -136,9 +136,9 @@ $(document).ready(function(){
 	$("#ParamProject").kendoDropDownList();
 	
 //Start Chart
-var barChart=function(s1,ticks){
-
-    //alert("barchart1"+ticks);
+var barChart=function(s1,ticks,max){
+	
+  //  alert("barchart1"+max);
 	   var plot1 = $.jqplot('chart1', [s1], {
         seriesDefaults:{
             renderer:$.jqplot.BarRenderer,
@@ -169,15 +169,19 @@ var barChart=function(s1,ticks){
                 ticks: ticks
             },
             yaxis: {
+				min:0, max:max+20,
                 pad: 0,
+				//ticks:[0, max+20],
                 tickOptions: {formatString: '%.2f'}
             }
         }
     });
-  $("#chart1").hide();
+ // $("#chart1").hide();
 }//end function barchart
-var barChart2=function(s2,ticks2){
-
+var barChart2=function(s2,ticks2,max){
+	//alert(max);
+//var s2 = [200, 600, 700, 1000];
+//var ticks2 = ['May', 'June', 'July', 'August'];
     //alert("barChart2"+ticks2);
 	   var plot1 = $.jqplot('chart2', [s2], {
      seriesDefaults:{
@@ -210,6 +214,8 @@ var barChart2=function(s2,ticks2){
          },
          yaxis: {
              pad: 0,
+			min:0, max:max+20,
+			//ticks:[0, max+20],
              tickOptions: {formatString: '%.2f'}
          }
      }
@@ -244,16 +250,18 @@ $("#chart2").hide();
 				var obj_series=eval("("+series+")");
 				
 				
-				barChart2(obj_series,obj_category);
-				
-				$("#chart2").show();
+				$("#chart2").remove();
+				$("#dialogbox2").append("<div id='chart2'></div>");
 				
 				$("#dialogbox2").dialog({
-					height:335,
+					height:370,
 					width:650,
 					modal:true,
 					title:title_name
 				});
+
+				barChart2(obj_series,obj_category,data[0][24]);
+				$("#chart2").show();
 				
 			}
 		});
@@ -275,6 +283,7 @@ $("#chart2").hide();
 				category+="[";
 				series+="[";
 				var i=0;
+				var max1=0;
 				$.each(data,function(index,indexEntry){
 					
 					if(i!=0){
@@ -283,25 +292,31 @@ $("#chart2").hide();
 					}
 					category+="'"+indexEntry[0]+"'";
 					series+=indexEntry[1];
+					max1=indexEntry[2];
 				i++;
 				});
 				category+="]";
 				series+="]";
 				//alert(category+""+series);
+				
 				var obj_category=eval("("+category+")");
 				var obj_series=eval("("+series+")");
 				
+				//alert(obj_series+","+obj_category);
+				$("#chart1").remove();
+				$("#dialogbox1").append("<div id='chart1'></div>");
 				
-				barChart(obj_series,obj_category);
 				
 				$("#chart1").show();
 				
 				$("#dialogbox1").dialog({
-					height:335,
+					height:370,
 					width:650,
 					modal:true,
 					title: title_name
 				});
+			barChart(obj_series,obj_category,max1);
+			
 			}
 		});
 		
@@ -403,8 +418,8 @@ Your
 				  
 				  ]; 	
 	// ################ Genarate GRID ################# //
-	var grid=function(contentData){
-	$("#grid").kendoGrid({
+	var grid=function(gridName,contentData){
+	$("#"+gridName).kendoGrid({
 		   //ไม่กำหนดความสูง height จะเป็น auto
           //height: 500,
 		  detailInit: detailInit1,
@@ -1200,6 +1215,7 @@ Your
 	//End Project
 	//Start TotalWeightPercentage
 	$("#form_1").submit(function(){
+		$("#contentKpi").empty();
 		$("#bodyContent").show();
 		//START Participants 
 		$.ajax({
@@ -1242,13 +1258,15 @@ Your
 		$.ajax({
 		url:'resultUrl.jsp',
 		type:'get',
-		async:false,
+		async:true,
 		dataType:'json',
 		data:{'request':'catePerspective','paramYear':$("#ParamYear").val(),'paramMonth':$("#ParamMonth").val(),'paramProject':$("#ParamProject").val()},
 		success:function(data){
 			//alert(data.length);
+			console.log(data);
+			var contentKpi="";
 			for(var i=0;i<data.length;i++){
-				//alert(data[i]);
+				
 				$.ajax({
 					url:'resultUrl.jsp',
 					type:'get',
@@ -1256,17 +1274,18 @@ Your
 					async:false,
 					data:{'cateKpi':data[i],'request':'KpiList','paramYear':$("#ParamYear").val(),'paramMonth':$("#ParamMonth").val(),'paramProject':$("#ParamProject").val()},
 					success:function(data2){
+						//alert(data2[0][9]);
+						//alert(data2[0]);
 						
-						var contentKpi="";
 						contentKpi+="<!--------------------------- Finance start--------------------------->";
 						contentKpi+="	<div class=\"titleKPI\">";
 						
-						contentKpi+="<div class=\"titleKPI_L\">"+data[i]+"</div>";
-						contentKpi+="<div class=\"titleKPI_R\" id=\""+data[i]+"\">Click to show comparison chart</div>";
+						contentKpi+="<div class=\"titleKPI_L\">"+data2[0][0]+"</div>";
+						contentKpi+="<div class=\"titleKPI_R\" id=\""+data2[0][0]+"\">Click to show comparison chart</div>";
 						contentKpi+="<br style=\"clear:both\">";
 						contentKpi+="</div>";
 							contentKpi+="<div class=\"tableContent\">";
-							contentKpi+="<table id=\"grid\">";
+							contentKpi+="<table id=\"grid"+data2[0][0]+"\">";
 							contentKpi+="<thead>";
 								contentKpi+="<tr>";
 										  
@@ -1299,12 +1318,15 @@ Your
 						contentKpi+="</div>";
 						contentKpi+="<!--------------------------- Finance end--------------------------->";
 						
-						$("#contentKpi").html(contentKpi);
+						//alert(contentKpi);
 						
+						$("#contentKpi").append(contentKpi);
+						contentKpi="";
 						
 						var contentData="";
 						contentData+="[";
 						var j=0;
+						//alert(data2[0][0]+"-"+data2[0][1]+"-"+data2[0][2]+"-"+data2[0][3]+"-"+data2[0][4]+"-"+data2[0][5]+"-"+data2[0][6]+"-"+data2[0][7]+"-"+data2[0][8]);
 						$.each(data2,function(index,indexEntry){
 							/*
 							console.log(indexEntry[0]);
@@ -1350,7 +1372,7 @@ Your
 						contentData+="]";
 						var obj_contentData = eval("("+contentData+")");
 						//console.log(obj_contentData);
-						grid(obj_contentData);
+						grid("grid"+data2[0][0],obj_contentData);
 						
 					}
 					});
@@ -1745,12 +1767,12 @@ Your
 	</div>
 	
 	<div id="dialogbox1" style="padding-top:20px;">
-		<div id="chart1" style="width:600px; height:250px;"></div>
+		<div id="chart1" style="width:600px; height:275px; margin-top:20px;"></div>
 		
 	</div>
 	<div id="dialogbox2" style="padding-top:20px;">
 		
-		<div id="chart2" style="width:600px; height:275px;"></div>
+		<div id="chart2" style="width:600px; height:275px; margin-top:20px;"></div>
 	</div>
 	
 	</body>
