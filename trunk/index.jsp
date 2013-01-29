@@ -872,8 +872,8 @@ Your
 	// ################ Genarate GRID ################# //
 	//################################################# 4
 	
-	var userLogin="00000001";
-	//var userLogin ="<%=remoteUser%>";
+	//var userLogin="00000001";
+	var userLogin ="<%=remoteUser%>";
 	//alert(userLogin);
 	//console.log(userLogin);
 	/*JavaScript Require*/
