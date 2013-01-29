@@ -129,6 +129,7 @@ if(request.getParameter("request").equals("KpiList")){
 		objKpiSub.add(rs.getString(7));
 		objKpiSub.add(rs.getString(8));
 		objKpiSub.add(rs.getString(9));
+
 		
 		objKpi.add(objKpiSub);
 		
@@ -194,10 +195,15 @@ if(request.getParameter("request").equals("ComparisonChart")){
 	
 	JSONArray obj_ComparisonChart =new JSONArray();
 	rs=mysqlConn.selectData(ComparisonChart);
+	int max=0;
 	while(rs.next()){
 		JSONArray obj_ComparisonChart_sub =new JSONArray();
 		obj_ComparisonChart_sub.add(rs.getString("kpi_code"));
 		obj_ComparisonChart_sub.add(rs.getString("achieve_percentage"));
+		if(max<=rs.getInt("achieve_percentage")){
+			max=rs.getInt("achieve_percentage");
+		}
+		obj_ComparisonChart_sub.add(max);
 		obj_ComparisonChart.add(obj_ComparisonChart_sub);
 	}
 	out.println(obj_ComparisonChart);
@@ -210,13 +216,16 @@ if(request.getParameter("request").equals("KpiTrendChart")){
 	rs=mysqlConn.selectData(ComparisonChart);
 	while(rs.next()){
 		JSONArray obj_KpiTrendChart_sub =new JSONArray();
-
+		int max =0;
 		if(rs.getInt("result_month")!=1){
 			obj_KpiTrendChart_sub.add("Jan");
 			obj_KpiTrendChart_sub.add("0");	
 		}else if(rs.getInt("result_month")==1){
 			obj_KpiTrendChart_sub.add("Jan");
 			obj_KpiTrendChart_sub.add(rs.getString("achieve_percentage"));	
+			if(max <= rs.getInt("achieve_percentage")){
+			max=rs.getInt("achieve_percentage");
+			}
 		}
 		
 		if(rs.getInt("result_month")!=2){
@@ -225,6 +234,9 @@ if(request.getParameter("request").equals("KpiTrendChart")){
 		}else if(rs.getInt("result_month")==2){
 			obj_KpiTrendChart_sub.add("Feb");
 			obj_KpiTrendChart_sub.add(rs.getString("achieve_percentage"));	
+			if(max <= rs.getInt("achieve_percentage")){
+			max=rs.getInt("achieve_percentage");
+			}
 		}
 		
 		if(rs.getInt("result_month")!=3){
@@ -233,6 +245,9 @@ if(request.getParameter("request").equals("KpiTrendChart")){
 		}else if(rs.getInt("result_month")==3){
 			obj_KpiTrendChart_sub.add("Mar");
 			obj_KpiTrendChart_sub.add(rs.getString("achieve_percentage"));	
+			if(max <= rs.getInt("achieve_percentage")){
+			max=rs.getInt("achieve_percentage");
+			}
 		}
 		
 		if(rs.getInt("result_month")!=4){
@@ -241,6 +256,9 @@ if(request.getParameter("request").equals("KpiTrendChart")){
 		}else if(rs.getInt("result_month")==4){
 			obj_KpiTrendChart_sub.add("Apr");
 			obj_KpiTrendChart_sub.add(rs.getString("achieve_percentage"));	
+			if(max <= rs.getInt("achieve_percentage")){
+			max=rs.getInt("achieve_percentage");
+			}
 		}
 		
 		if(rs.getInt("result_month")!=5){
@@ -249,6 +267,9 @@ if(request.getParameter("request").equals("KpiTrendChart")){
 		}else if(rs.getInt("result_month")==5){
 			obj_KpiTrendChart_sub.add("May");
 			obj_KpiTrendChart_sub.add(rs.getString("achieve_percentage"));	
+			if(max <= rs.getInt("achieve_percentage")){
+			max=rs.getInt("achieve_percentage");
+			}
 		}
 		
 		if(rs.getInt("result_month")!=6){
@@ -257,6 +278,9 @@ if(request.getParameter("request").equals("KpiTrendChart")){
 		}else if(rs.getInt("result_month")==6){
 			obj_KpiTrendChart_sub.add("Jun");
 			obj_KpiTrendChart_sub.add(rs.getString("achieve_percentage"));	
+			if(max <= rs.getInt("achieve_percentage")){
+			max=rs.getInt("achieve_percentage");
+			}
 		}
 		
 		if(rs.getInt("result_month")!=7){
@@ -265,6 +289,9 @@ if(request.getParameter("request").equals("KpiTrendChart")){
 		}else if(rs.getInt("result_month")==7){
 			obj_KpiTrendChart_sub.add("Jul");
 			obj_KpiTrendChart_sub.add(rs.getString("achieve_percentage"));	
+			if(max <= rs.getInt("achieve_percentage")){
+			max=rs.getInt("achieve_percentage");
+			}
 		}
 	
 		
@@ -276,6 +303,9 @@ if(request.getParameter("request").equals("KpiTrendChart")){
 		}else if(rs.getInt("result_month")==8){
 			obj_KpiTrendChart_sub.add("Aug");
 			obj_KpiTrendChart_sub.add(rs.getString("achieve_percentage"));	
+			if(max <= rs.getInt("achieve_percentage")){
+			max=rs.getInt("achieve_percentage");
+			}
 		}
 		
 		if(rs.getInt("result_month")!=9){
@@ -284,6 +314,9 @@ if(request.getParameter("request").equals("KpiTrendChart")){
 		}else if(rs.getInt("result_month")==9){
 			obj_KpiTrendChart_sub.add("Sep");
 			obj_KpiTrendChart_sub.add(rs.getString("achieve_percentage"));	
+			if(max <= rs.getInt("achieve_percentage")){
+			max=rs.getInt("achieve_percentage");
+			}
 		}
 		
 		if(rs.getInt("result_month")!=10){
@@ -292,6 +325,9 @@ if(request.getParameter("request").equals("KpiTrendChart")){
 		}else if(rs.getInt("result_month")==10){
 			obj_KpiTrendChart_sub.add("Oct");
 			obj_KpiTrendChart_sub.add(rs.getString("achieve_percentage"));	
+			if(max <= rs.getInt("achieve_percentage")){
+			max=rs.getInt("achieve_percentage");
+			}
 		}
 		
 		if(rs.getInt("result_month")!=11){
@@ -300,6 +336,9 @@ if(request.getParameter("request").equals("KpiTrendChart")){
 		}else if(rs.getInt("result_month")==11){
 			obj_KpiTrendChart_sub.add("Nov");
 			obj_KpiTrendChart_sub.add(rs.getString("achieve_percentage"));	
+			if(max <= rs.getInt("achieve_percentage")){
+			max=rs.getInt("achieve_percentage");
+			}
 		}
 		
 		if(rs.getInt("result_month")!=12){
@@ -308,10 +347,11 @@ if(request.getParameter("request").equals("KpiTrendChart")){
 		}else if(rs.getInt("result_month")==12){
 			obj_KpiTrendChart_sub.add("Dec");
 			obj_KpiTrendChart_sub.add(rs.getString("achieve_percentage"));	
+			if(max <= rs.getInt("achieve_percentage")){
+			max=rs.getInt("achieve_percentage");
+			}
 		}
-		
-		
-
+		obj_KpiTrendChart_sub.add(max);	
 		obj_KpiTrendChart.add(obj_KpiTrendChart_sub);
 	}
 	out.println(obj_KpiTrendChart);
