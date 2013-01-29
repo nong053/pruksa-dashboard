@@ -872,8 +872,8 @@ Your
 	// ################ Genarate GRID ################# //
 	//################################################# 4
 	
-	//var userLogin="00000001";
-	var userLogin ="<%=remoteUser%>";
+	var userLogin="00000001";
+	//var userLogin ="<%=remoteUser%>";
 	//alert(userLogin);
 	//console.log(userLogin);
 	/*JavaScript Require*/
@@ -1228,8 +1228,8 @@ Your
 			data:{'request':'TotalWeightPercentage','paramYear':$("#ParamYear").val(),'paramMonth':$("#ParamMonth").val(),'paramProject':$("#ParamProject").val()},
 			success:function(dataTotalWeight){
 			//alert(data[0]+" "+data[1]);
-			$("#userScore").html(parseFloat(dataTotalWeight[0]).toFixed(2));
-			$("#score").html(dataTotalWeight[1]);
+			$("#userScore").html(dataTotalWeight[0]);
+			$("#score").html(parseFloat(dataTotalWeight[1]).toFixed(2));
 			//$("#score").html(data[2]); call function genarator color ball
 			//alert("data"+dataTotalWeight[2]);
 			$("#ballScoreTotal").html(ballColorFunction(dataTotalWeight[2]));

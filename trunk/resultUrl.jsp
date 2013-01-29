@@ -84,7 +84,6 @@ if(request.getParameter("request").equals("TotalWeightPercentage")){
 	array_obj.add(project);
 	array_obj.add(total_weight_percentage);
 	array_obj.add(color_code);
-	
 	out.println(array_obj);
 	
 }
