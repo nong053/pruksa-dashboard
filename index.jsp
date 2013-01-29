@@ -1263,7 +1263,7 @@ Your
 		data:{'request':'catePerspective','paramYear':$("#ParamYear").val(),'paramMonth':$("#ParamMonth").val(),'paramProject':$("#ParamProject").val()},
 		success:function(data){
 			//alert(data.length);
-			console.log(data);
+			//console.log(data);
 			var contentKpi="";
 			for(var i=0;i<data.length;i++){
 				
