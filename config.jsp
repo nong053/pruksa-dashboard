@@ -11,9 +11,11 @@
 	mysqlConn.setPass("apps");
 */
 	mysqlConn.setDriver("com.mysql.jdbc.Driver");
-	mysqlConn.setUrl("jdbc:mysql://172.25.0.235:3306/pruksa_dwh");
+	//mysqlConn.setUrl("jdbc:mysql://172.25.0.235:3306/pruksa_dwh");
+	mysqlConn.setUrl("jdbc:mysql://localhost:3306/pruksa_dwh");
 	mysqlConn.setUser("root");
-	mysqlConn.setPass("Pruks@bi");
+	//mysqlConn.setPass("Pruks@bi");
+	mysqlConn.setPass("root");
 	
     Connection conn;
     ResultSet rs=null;
