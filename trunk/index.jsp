@@ -889,6 +889,7 @@ Your
 	
 	//var userLogin="00000001";
 	var userLogin ="<%=remoteUser%>";
+
 	//alert(userLogin);
 	//console.log(userLogin);
 	/*JavaScript Require*/
@@ -1373,7 +1374,7 @@ Your
 						var obj_contentData = eval("("+contentData+")");
 						//console.log(obj_contentData);
 						grid("grid"+data2[0][0],obj_contentData);
-						
+						$(".ball").corner();
 					}
 					});
 				}
