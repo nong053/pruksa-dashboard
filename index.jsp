@@ -43,7 +43,6 @@ sendParamMonth="";
     <head>
         <title>BSC Dashboard</title>
 		<!-- load stylesheet แบบ external-->
-
 		<link href="styles/index.css" rel="stylesheet">
 		<link href="styles/kendo.common.min.css" rel="stylesheet">
 		<link href="styles/kendo.default.min.css" rel="stylesheet">
@@ -1240,6 +1239,7 @@ Your
 				$("td#tdProject").prepend(selectProject);
 				//Define kendoDrowDownList 2 on change
 				$("#ParamProject").kendoDropDownList();
+				$("#submit1").trigger("click");
 			}
 		});
 		
@@ -1421,9 +1421,9 @@ Your
 		return false;
 	});
 	//Trigger click submit
-	setTimeout(function(){
-		$("#submit1").trigger("click");
-	},1000);
+
+		
+
 	
 	
 	//End TotalWeightPercentage
@@ -1434,9 +1434,11 @@ Your
     </head>
     <body>
 	<%
+	/*
 	out.println(pjCode);
 	out.println(sendParamMonth);
 	out.println(sendParamYear);
+	*/
 	//if(sendParamYear==null){
 		//out.print("data is null");
 	//}
