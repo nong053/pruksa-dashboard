@@ -1,4 +1,25 @@
 <%@page contentType="text/html" pageEncoding="utf-8"%>
+<% 
+String pjCode="";
+String sendParamMonth="";
+String sendParamYear="";
+String paramYear="";
+
+
+pjCode = request.getParameter("pjCode");
+sendParamMonth =request.getParameter("paramMonth");
+sendParamYear = request.getParameter("paramYear");
+if(pjCode==null){
+pjCode="";
+}
+if(sendParamYear==null){
+sendParamYear="";
+}
+if(sendParamMonth==null){
+sendParamMonth="";
+}
+
+%>
 <%@ include file="config.jsp" %>
 <%@ page language="java" 
 	import="java.util.ArrayList,
@@ -16,6 +37,7 @@
 			org.pentaho.platform.uifoundation.chart.ChartHelper,
       org.pentaho.platform.web.http.PentahoHttpSessionHelper" %>
 <% String remoteUser = request.getRemoteUser();%>
+
 <!doctype html>
 <html>
     <head>
@@ -886,10 +908,14 @@ Your
    	});
 	// ################ Genarate GRID ################# //
 	//################################################# 4
-	
-	//var userLogin="00000001";
-	var userLogin ="<%=remoteUser%>";
-
+	var userLogin="";
+	 
+	 
+	if(!userLogin){
+		userLogin="00000001";
+	}else{
+		userLogin ="<%=remoteUser%>";
+	}
 	//alert(userLogin);
 	//console.log(userLogin);
 	/*JavaScript Require*/
@@ -1153,8 +1179,6 @@ Your
 	
 	Month(1);
 	$(".listSelectMonth").kendoDropDownList();
-	
-
 	//Management Month
 	$("#ParamMonth").live("change",function(){
 	 //alert("hello change month");
@@ -1164,6 +1188,8 @@ Your
 	//End Month
 	//Start Project
 	var Project = function(year,month,userLogin){
+		var sendParameterJavaScript="<%=pjCode%>";
+		//alert(sendParameterJavaScript);
 		//$("#tdProject").remove();
 		
 		//alert("YEAR="+year+"month="+month+"userLogin="+userLogin);
@@ -1200,8 +1226,14 @@ Your
 				$("td#tdProject").empty();
 				selectProject+="<select id=\"ParamProject\">";
 				$.each(data,function(index,indexEntry){
+					
+						if(sendParameterJavaScript==indexEntry){
+							selectProject+="<option value=\""+indexEntry+"\" selected>"+indexEntry+"</option>";
+						}else{
+							
+							selectProject+="<option value=\""+indexEntry+"\">"+indexEntry+"</option>";
+						}
 						
-						selectProject+="<option value=\""+indexEntry+"\">"+indexEntry+"</option>";
 				});
 				
 				selectProject+="</select>";
@@ -1402,10 +1434,12 @@ Your
     </head>
     <body>
 	<%
-
-
-
-
+	out.println(pjCode);
+	out.println(sendParamMonth);
+	out.println(sendParamYear);
+	//if(sendParamYear==null){
+		//out.print("data is null");
+	//}
 	//Year
 	/*
 	String paramYear="";
@@ -1422,12 +1456,17 @@ Your
 	}
 	conn.close();
 	*/
-	String paramYear="";
+
 	String query="select distinct result_year from kpi_result order by result_year desc";
 	rs=mysqlConn.selectData(query);
 
 	while(rs.next()){
+		if(sendParamYear.equals(rs.getString("result_year"))){
+			paramYear+="<option value="+sendParamYear+" selected>"+sendParamYear+"</option>";
+		}else{
 			paramYear+="<option value="+rs.getInt("result_year")+">"+rs.getInt("result_year")+"</option>";
+		}
+			
 	}
 	conn.close();
 
@@ -1472,7 +1511,9 @@ Your
 					
 					<td class="tableParamWidth">
 					<select name="ParamYear" id="ParamYear" class="listSelect">
-						<%=paramYear%>
+						<%
+							out.print(paramYear);
+						%>
 					</select>
 					</td>
 					
@@ -1775,6 +1816,6 @@ Your
 		
 		<div id="chart2" style="width:600px; height:275px; margin-top:20px;"></div>
 	</div>
-	
+
 	</body>
 </html>

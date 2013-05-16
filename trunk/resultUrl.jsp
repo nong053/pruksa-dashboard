@@ -155,7 +155,8 @@ if(request.getParameter("request").equals("ItemList")){
 	out.println("paramKpiCode"+paramKpiCode);
 	*/
 	JSONArray objKpiItemList = new JSONArray();
-	String queryItemList="CALL ItemList("+paramYear+","+paramMonth+",'"+paramProject+"','"+paramKpiCode+"')";
+	//String queryItemList="CALL ItemList("+paramYear+","+paramMonth+",'"+paramProject+"','"+paramKpiCode+"')";
+	String queryItemList="CALL ItemList(2012,12,'10000000','CS1')";
 	//String queryItemList="CALL ItemList(2012,12,'10000000','CS1')";
 	rs=mysqlConn.selectData(queryItemList);
 	ResultSet rs2=null;
