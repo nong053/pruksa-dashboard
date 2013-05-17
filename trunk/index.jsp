@@ -1224,15 +1224,18 @@ Your
 				var selectProject="";
 				$("td#tdProject").empty();
 				selectProject+="<select id=\"ParamProject\">";
+				
 				$.each(data,function(index,indexEntry){
-					
+					if(sendParameterJavaScript==""){
+					//alert("parameter is null"+sendParameterJavaScript);
+					selectProject+="<option value=\""+indexEntry+"\">"+indexEntry+"</option>";
+					}else{
 						if(sendParameterJavaScript==indexEntry){
-							selectProject+="<option value=\""+indexEntry+"\" selected>"+indexEntry+"</option>";
-						}else{
-							
-							selectProject+="<option value=\""+indexEntry+"\">"+indexEntry+"</option>";
-						}
-						
+								selectProject+="<option value=\""+indexEntry+"\" selected>"+indexEntry+"</option>";
+							}else{
+								//selectProject+="<option value=\""+indexEntry+"\">"+indexEntry+"</option>";
+							}//if2
+					}//if1
 				});
 				
 				selectProject+="</select>";
