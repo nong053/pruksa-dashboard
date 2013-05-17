@@ -908,18 +908,16 @@ Your
 	// ################ Genarate GRID ################# //
 	//################################################# 4
 	var userLogin="";
-	 
-	 
-	if(!userLogin){
-		userLogin="00000001";
-	}else{
-		userLogin ="<%=remoteUser%>";
-	}
+	 userLogin ="<%=remoteUser%>";
+	// userLogin="00000001";
+	
 	//alert(userLogin);
 	//console.log(userLogin);
 	/*JavaScript Require*/
 	$("#ParamYear").change(function(){
 		//alert($(this).val());
+		var sendParamMonth="<%=sendParamMonth%>";
+	
 		var year=$(this).val();
 		$.ajax({
 			url:'resultUrl.jsp',
@@ -940,7 +938,11 @@ Your
 				$.each(data,function(index,indexEntry){
 				monthNumber=parseInt((indexEntry[1]));
 				//alert(monthNumber);
-				month+="<option value=\""+indexEntry[1]+"\">"+indexEntry[0]+"</option>";
+						if(parseInt(sendParamMonth)==monthNumber){
+						month+="<option value=\""+indexEntry[1]+"\" selected>"+indexEntry[0]+"</option>";
+						}else{
+						month+="<option value=\""+indexEntry[1]+"\">"+indexEntry[0]+"</option>";
+						}
 				});
 				month+="</select>";
 				$("#tdMonth").html(month);
