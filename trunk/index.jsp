@@ -909,7 +909,10 @@ Your
 	//################################################# 4
 	var userLogin="";
 	 userLogin ="<%=remoteUser%>";
-	// userLogin="00000001";
+	 if(userLogin=="joe"){
+	userLogin="00000001";
+	 }
+	
 	
 	//alert(userLogin);
 	//console.log(userLogin);
