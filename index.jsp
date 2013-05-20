@@ -1469,14 +1469,27 @@ Your
 
 	String query="select distinct result_year from kpi_result order by result_year desc";
 	rs=mysqlConn.selectData(query);
-
-	while(rs.next()){
-		if(sendParamYear.equals(rs.getString("result_year"))){
-			paramYear+="<option value="+sendParamYear+" selected>"+sendParamYear+"</option>";
+/*
+if(sendParameterJavaScript==""){
+//alert("parameter is null"+sendParameterJavaScript);
+selectProject+="<option value=\""+indexEntry+"\">"+indexEntry+"</option>";
+}else{
+	if(sendParameterJavaScript==indexEntry){
+			selectProject+="<option value=\""+indexEntry+"\" selected>"+indexEntry+"</option>";
 		}else{
-			paramYear+="<option value="+rs.getInt("result_year")+">"+rs.getInt("result_year")+"</option>";
-		}
-			
+			//selectProject+="<option value=\""+indexEntry+"\">"+indexEntry+"</option>";
+		}//if2
+}//if1
+*/
+	while(rs.next()){
+		if(sendParamYear.equals("")){
+		paramYear+="<option value="+rs.getInt("result_year")+" >"+rs.getInt("result_year")+"</option>";
+		}else{
+			if(sendParamYear.equals(rs.getString("result_year"))){
+			paramYear+="<option value="+rs.getInt("result_year")+" selected>"+rs.getInt("result_year")+"</option>";
+			}
+		}//if1
+
 	}
 	conn.close();
 
