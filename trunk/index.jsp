@@ -1193,6 +1193,11 @@ Your
 	//Start Project
 	var Project = function(year,month,userLogin){
 		var sendParameterJavaScript="<%=pjCode%>";
+		
+		if(sendParameterJavaScript==null){
+		sendParameterJavaScript="";
+		}
+		
 		//alert(sendParameterJavaScript);
 		//$("#tdProject").remove();
 		
