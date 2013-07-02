@@ -911,6 +911,7 @@ Your
 	 userLogin ="<%=remoteUser%>";
 	 if(userLogin=="joe"){
 	userLogin="00000001";
+	//userLogin="pentaho";
 	 }
 	
 	
@@ -1236,7 +1237,7 @@ Your
 				selectProject+="<select id=\"ParamProject\">";
 				
 				$.each(data,function(index,indexEntry){
-					if(sendParameterJavaScript==""){
+					if((sendParameterJavaScript=="") && (indexEntry!=null) ){
 					//alert("parameter is null"+sendParameterJavaScript);
 					selectProject+="<option value=\""+indexEntry+"\">"+indexEntry+"</option>";
 					}else{
